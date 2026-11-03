@@ -95,5 +95,35 @@ export const LESSON = {
       "title": "Mastra registry",
       "url": "https://mastra.ai/reference/core/mastra-class"
     }
+  ],
+  "readmeWorkflow": [
+    {
+      "step": "Validate selection",
+      "component": "src/lab.ts",
+      "behavior": "Accept only tutor/support and a bounded lesson ID."
+    },
+    {
+      "step": "Resolve registry",
+      "component": "src/mastra/index.ts",
+      "behavior": "Call Mastra.getAgent and expose the selected id/name, not raw configuration."
+    },
+    {
+      "step": "Execute lookup",
+      "component": "src/mastra/tools.ts",
+      "behavior": "Run the typed lesson-lookup tool against the public catalog."
+    },
+    {
+      "step": "Project boundaries",
+      "component": "src/lab.ts",
+      "behavior": "Return browser, host, runtime and provider responsibilities."
+    }
+  ],
+  "liveWorkflow": [
+    "The selected registered agent receives the student question and lesson ID.",
+    "The tutor can request the bounded catalog tool; generate() returns the provider response."
+  ],
+  "outcomeNotes": [
+    "An unknown registry key fails schema validation.",
+    "A missing catalog record is returned as found=false with record=null. The local inspection itself can still complete."
   ]
 } satisfies LessonMetadata;
